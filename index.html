@@ -1,0 +1,2327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSM Infrastructure Proposal - Delta Yards</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a4d2e;
+            --secondary: #4f8a6d;
+            --accent: #d4af37;
+            --dark: #0f2419;
+            --light: #f5f7f6;
+            --white: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            background: var(--light);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: var(--white);
+            padding: 3rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: var(--white);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .company-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin: 1.5rem 0;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 400;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section {
+            background: var(--white);
+            padding: 3rem;
+            margin: 2rem 0;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            animation: fadeIn 0.6s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent), var(--secondary));
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 2rem 0 1rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 24px rgba(26, 77, 46, 0.2);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(26, 77, 46, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(26, 77, 46, 0.15);
+            border-color: var(--secondary);
+        }
+
+        .card-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .feature-list li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            border-bottom: 1px solid rgba(26, 77, 46, 0.1);
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .architecture-diagram {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 2.5rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            border: 2px solid var(--secondary);
+        }
+
+        .architecture-layer {
+            background: var(--white);
+            padding: 1.2rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .layer-name {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .layer-component {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .flow-diagram {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px dashed var(--secondary);
+            margin: 1.5rem 0;
+        }
+
+        .flow-step {
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: linear-gradient(to right, var(--light), transparent);
+            border-left: 3px solid var(--accent);
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .flow-step::after {
+            content: '↓';
+            position: absolute;
+            left: 50%;
+            bottom: -1.5rem;
+            transform: translateX(-50%);
+            color: var(--secondary);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .flow-step:last-child::after {
+            display: none;
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .pricing-table thead {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+        }
+
+        .pricing-table th {
+            padding: 1.2rem;
+            text-align: left;
+            font-weight: 700;
+        }
+
+        .pricing-table td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid rgba(26, 77, 46, 0.1);
+        }
+
+        .pricing-table tr:hover {
+            background: var(--light);
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, var(--accent) 0%, #c19b2d 100%);
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .benefit-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(26, 77, 46, 0.15);
+        }
+
+        .benefit-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.8rem;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .benefit-icon::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .benefit-card:hover .benefit-icon::before {
+            opacity: 0.3;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: var(--white);
+            padding: 4rem 3rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="2"/></svg>');
+            opacity: 0.3;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(212, 175, 55, 0.6);
+        }
+
+        .footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 0.3rem;
+            font-weight: 500;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .company-name {
+                font-size: 1.8rem;
+            }
+
+            .section {
+                padding: 2rem 1.5rem;
+            }
+
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+
+        .note-box {
+            background: #fff8e1;
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .note-box strong {
+            color: var(--primary);
+        }
+
+        .comparison-table {
+            margin: 2rem 0;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--secondary);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid var(--white);
+            box-shadow: 0 0 0 2px var(--secondary);
+        }
+
+        .timeline-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Enhanced UI Effects */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .glow {
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.6); }
+        }
+
+        .diagram-image {
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            display: block;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .diagram-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 48px rgba(0,0,0,0.2);
+        }
+
+        .icon-illustration {
+            width: 100%;
+            max-width: 600px;
+            margin: 1.5rem auto;
+            display: block;
+            border-radius: 12px;
+        }
+
+        .shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shimmer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .gradient-border {
+            position: relative;
+            padding: 3px;
+            background: linear-gradient(135deg, var(--accent), var(--secondary), var(--primary));
+            border-radius: 20px;
+        }
+
+        .gradient-border-inner {
+            background: var(--white);
+            border-radius: 17px;
+            padding: 2rem;
+        }
+
+        .icon-box {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(26, 77, 46, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .icon-box:hover {
+            transform: rotate(5deg) scale(1.1);
+        }
+
+        .parallax-bg {
+            position: relative;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .wave-divider {
+            width: 100%;
+            height: 60px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="%23f5f7f6"/></svg>') no-repeat bottom;
+            background-size: cover;
+            margin-top: -1px;
+        }
+
+        .image-caption {
+            text-align: center;
+            font-style: italic;
+            color: var(--text-light);
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .comparison-image {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-image {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .image-with-caption {
+            text-align: center;
+        }
+
+        .rotate-on-hover {
+            transition: transform 0.5s ease;
+        }
+
+        .rotate-on-hover:hover {
+            transform: rotate(2deg) scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">DY</div>
+                <div>
+                    <div class="company-name">Delta Yards</div>
+                    <div class="tagline">Your Property Partner</div>
+                </div>
+            </div>
+            <h1>GSM Infrastructure Solution</h1>
+            <p class="subtitle">Enterprise-Grade Telephony System for High-Volume Real Estate Operations</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Executive Summary -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">01</div>
+                <h2>Executive Summary</h2>
+            </div>
+            <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">This proposal outlines a comprehensive, on-premise GSM telephony infrastructure designed specifically for Delta Yards' high-volume real estate operations. The solution will transform your communication capabilities with complete ownership, scalability, and seamless CRM integration.</p>
+            
+            <div class="grid-3">
+                <div class="stat-box">
+                    <div class="stat-number">250+</div>
+                    <div class="stat-label">SIM Capacity</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">System Ownership</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Uptime Guarantee</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Objectives -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">02</div>
+                <h2>Project Objectives & Business Requirements</h2>
+            </div>
+            
+            <h3>Real Estate Communication Challenges</h3>
+            <p>Delta Yards operates in the competitive real estate sector where communication excellence is critical. Your business requirements include:</p>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">🎯 High-Volume Outbound Calling</div>
+                    <p>Continuous property lead engagement with hundreds of daily outbound calls</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🔄 Systematic Follow-ups</div>
+                    <p>Automated follow-up scheduling and tracking for lead nurturing</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">💬 WhatsApp Integration</div>
+                    <p>Seamless WhatsApp communication linked with customer profiles</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📞 Incoming Inquiry Management</div>
+                    <p>Professional handling and tracking of all property inquiries</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🎙️ Call Recording & Compliance</div>
+                    <p>Complete call recording for quality monitoring and legal compliance</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📊 CRM Integration</div>
+                    <p>One-click calling and automatic data synchronization with your CRM</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="color: white; margin-top: 0;">Solution Deliverables</h3>
+                <ul class="feature-list" style="color: white;">
+                    <li style="border-bottom-color: rgba(255,255,255,0.2);">✅ Fully on-premise GSM telephony infrastructure</li>
+                    <li style="border-bottom-color: rgba(255,255,255,0.2);">✅ 250-300 SIM card capacity with expansion capability</li>
+                    <li style="border-bottom-color: rgba(255,255,255,0.2);">✅ CRM-initiated calling with automatic call logging</li>
+                    <li style="border-bottom-color: rgba(255,255,255,0.2);">✅ Complete incoming call handling and routing</li>
+                    <li style="border-bottom-color: rgba(255,255,255,0.2);">✅ Automated call recording and archival system</li>
+                    <li style="border-bottom-color: rgba(255,255,255,0.2);">✅ WhatsApp Business API webhook integration</li>
+                    <li style="border-bottom-color: rgba(255,255,255,0.2);">✅ Dual ISP redundancy for maximum uptime</li>
+                    <li style="border-bottom-color: rgba(255,255,255,0.2);">✅ Advanced analytics and reporting dashboard</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- System Architecture -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">03</div>
+                <h2>Technical Architecture Overview</h2>
+            </div>
+
+            <div class="architecture-diagram">
+                <h3 style="margin-top: 0; text-align: center; color: var(--dark);">Multi-Layer System Architecture</h3>
+                
+                <!-- Architecture Diagram Illustration -->
+                <svg class="diagram-image" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background -->
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#1a4d2e;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#4f8a6d;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#d4af37;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#c19b2d;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Application Layer -->
+                    <rect x="50" y="30" width="700" height="60" rx="10" fill="url(#grad1)" opacity="0.9"/>
+                    <text x="400" y="55" text-anchor="middle" fill="white" font-size="18" font-weight="bold">Application Layer</text>
+                    <text x="400" y="75" text-anchor="middle" fill="white" font-size="14">Your Custom CRM</text>
+                    
+                    <!-- Arrow -->
+                    <path d="M 400 90 L 400 110" stroke="#d4af37" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                    
+                    <!-- PBX Engine -->
+                    <rect x="50" y="120" width="700" height="60" rx="10" fill="url(#grad1)" opacity="0.85"/>
+                    <text x="400" y="145" text-anchor="middle" fill="white" font-size="18" font-weight="bold">PBX Engine</text>
+                    <text x="400" y="165" text-anchor="middle" fill="white" font-size="14">Asterisk (Call Control & Routing)</text>
+                    
+                    <!-- Arrow -->
+                    <path d="M 400 180 L 400 200" stroke="#d4af37" stroke-width="3" fill="none"/>
+                    
+                    <!-- Management UI -->
+                    <rect x="50" y="210" width="700" height="60" rx="10" fill="url(#grad1)" opacity="0.8"/>
+                    <text x="400" y="235" text-anchor="middle" fill="white" font-size="18" font-weight="bold">Management UI</text>
+                    <text x="400" y="255" text-anchor="middle" fill="white" font-size="14">FreePBX (Admin Console)</text>
+                    
+                    <!-- Arrows to GSM and Messaging -->
+                    <path d="M 250 270 L 200 300" stroke="#d4af37" stroke-width="3" fill="none"/>
+                    <path d="M 550 270 L 600 300" stroke="#d4af37" stroke-width="3" fill="none"/>
+                    
+                    <!-- GSM Hardware -->
+                    <rect x="50" y="300" width="300" height="60" rx="10" fill="url(#grad2)"/>
+                    <text x="200" y="325" text-anchor="middle" fill="white" font-size="18" font-weight="bold">GSM Hardware</text>
+                    <text x="200" y="345" text-anchor="middle" fill="white" font-size="14">8x 32-Port GSM Gateways</text>
+                    
+                    <!-- Messaging -->
+                    <rect x="450" y="300" width="300" height="60" rx="10" fill="url(#grad2)"/>
+                    <text x="600" y="325" text-anchor="middle" fill="white" font-size="18" font-weight="bold">Messaging</text>
+                    <text x="600" y="345" text-anchor="middle" fill="white" font-size="14">WhatsApp Business API</text>
+                    
+                    <!-- Arrows to Network -->
+                    <path d="M 200 360 L 300 400" stroke="#d4af37" stroke-width="3" fill="none"/>
+                    <path d="M 600 360 L 500 400" stroke="#d4af37" stroke-width="3" fill="none"/>
+                    
+                    <!-- Network -->
+                    <rect x="250" y="400" width="300" height="60" rx="10" fill="url(#grad1)" opacity="0.75"/>
+                    <text x="400" y="425" text-anchor="middle" fill="white" font-size="18" font-weight="bold">Network Layer</text>
+                    <text x="400" y="445" text-anchor="middle" fill="white" font-size="14">Dual ISP with Load Balancer</text>
+                    
+                    <!-- Arrow -->
+                    <path d="M 400 460 L 400 480" stroke="#d4af37" stroke-width="3" fill="none"/>
+                    
+                    <!-- Storage -->
+                    <rect x="250" y="490" width="300" height="60" rx="10" fill="url(#grad1)" opacity="0.7"/>
+                    <text x="400" y="515" text-anchor="middle" fill="white" font-size="18" font-weight="bold">Storage Layer</text>
+                    <text x="400" y="535" text-anchor="middle" fill="white" font-size="14">NAS/RAID (5-10TB Recordings)</text>
+                    
+                    <!-- Arrow marker definition -->
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                            <polygon points="0 0, 10 5, 0 10" fill="#d4af37" />
+                        </marker>
+                    </defs>
+                    
+                    <!-- Decorative elements -->
+                    <circle cx="30" cy="60" r="5" fill="#d4af37" opacity="0.5" class="pulse"/>
+                    <circle cx="770" cy="60" r="5" fill="#d4af37" opacity="0.5" class="pulse"/>
+                    <circle cx="30" cy="330" r="5" fill="#d4af37" opacity="0.5" class="pulse"/>
+                    <circle cx="770" cy="330" r="5" fill="#d4af37" opacity="0.5" class="pulse"/>
+                </svg>
+                <p class="image-caption">Complete System Architecture - All Layers Working in Harmony</p>
+                
+                <div class="architecture-layer">
+                    <div class="layer-name">Application Layer</div>
+                    <div class="layer-component">Your Custom CRM</div>
+                </div>
+                
+                <div class="architecture-layer">
+                    <div class="layer-name">PBX Engine</div>
+                    <div class="layer-component">Asterisk (Call Control & Routing)</div>
+                </div>
+                
+                <div class="architecture-layer">
+                    <div class="layer-name">Management UI</div>
+                    <div class="layer-component">FreePBX (Admin Console)</div>
+                </div>
+                
+                <div class="architecture-layer">
+                    <div class="layer-name">GSM Hardware</div>
+                    <div class="layer-component">8x 32-Port GSM Gateways</div>
+                </div>
+                
+                <div class="architecture-layer">
+                    <div class="layer-name">Messaging</div>
+                    <div class="layer-component">WhatsApp Business API</div>
+                </div>
+                
+                <div class="architecture-layer">
+                    <div class="layer-name">Network</div>
+                    <div class="layer-component">Dual ISP with Load Balancer</div>
+                </div>
+                
+                <div class="architecture-layer">
+                    <div class="layer-name">Storage</div>
+                    <div class="layer-component">NAS/RAID (5-10TB for recordings)</div>
+                </div>
+            </div>
+
+            <h3>FreePBX Management Capabilities</h3>
+            <p>The FreePBX interface provides comprehensive control:</p>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">SIP Trunk Configuration</div>
+                    <p>Set up and manage connections between PBX and GSM gateways</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Call Route Management</div>
+                    <p>Configure intelligent routing rules and extensions</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Queue Strategies</div>
+                    <p>Set up call queues with ring strategies for optimal distribution</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Recording Rules</div>
+                    <p>Define recording policies and storage paths</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Live Monitoring</div>
+                    <p>Real-time monitoring of calls and agent performance</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Analytics Dashboard</div>
+                    <p>Comprehensive reporting and call analytics</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call Handling Flows -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">04</div>
+                <h2>Call Handling Workflows</h2>
+            </div>
+
+            <h3>A. Outgoing Calls (CRM-Initiated)</h3>
+            
+            <!-- Outgoing Call Flow Illustration -->
+            <svg class="diagram-image" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="flowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#1a4d2e;stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#4f8a6d;stop-opacity:0.9" />
+                    </linearGradient>
+                </defs>
+                
+                <!-- Agent/CRM -->
+                <g transform="translate(50, 50)">
+                    <circle cx="50" cy="50" r="45" fill="url(#flowGrad)"/>
+                    <text x="50" y="45" text-anchor="middle" fill="white" font-size="30">👤</text>
+                    <text x="50" y="70" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Agent</text>
+                    <text x="50" y="120" text-anchor="middle" fill="#1a4d2e" font-size="14" font-weight="bold">Clicks Call</text>
+                </g>
+                
+                <!-- Arrow 1 -->
+                <path d="M 150 100 L 280 100" stroke="#d4af37" stroke-width="4" fill="none" marker-end="url(#arrow)"/>
+                <text x="215" y="90" text-anchor="middle" fill="#1a4d2e" font-size="12">API Request</text>
+                
+                <!-- PBX Server -->
+                <g transform="translate(280, 50)">
+                    <rect x="0" y="0" width="120" height="100" rx="10" fill="url(#flowGrad)"/>
+                    <text x="60" y="40" text-anchor="middle" fill="white" font-size="28">🖥️</text>
+                    <text x="60" y="70" text-anchor="middle" fill="white" font-size="13" font-weight="bold">PBX Server</text>
+                    <text x="60" y="85" text-anchor="middle" fill="white" font-size="10">Call Processing</text>
+                </g>
+                
+                <!-- Arrow 2 -->
+                <path d="M 400 100 L 530 100" stroke="#d4af37" stroke-width="4" fill="none" marker-end="url(#arrow)"/>
+                <text x="465" y="90" text-anchor="middle" fill="#1a4d2e" font-size="12">Select SIM</text>
+                
+                <!-- GSM Gateway -->
+                <g transform="translate(530, 50)">
+                    <rect x="0" y="0" width="120" height="100" rx="10" fill="url(#flowGrad)"/>
+                    <text x="60" y="40" text-anchor="middle" fill="white" font-size="28">📡</text>
+                    <text x="60" y="70" text-anchor="middle" fill="white" font-size="13" font-weight="bold">GSM Gateway</text>
+                    <text x="60" y="85" text-anchor="middle" fill="white" font-size="10">256 SIM Slots</text>
+                </g>
+                
+                <!-- Arrow 3 (curved down) -->
+                <path d="M 590 150 Q 590 220 400 250" stroke="#d4af37" stroke-width="4" fill="none" marker-end="url(#arrow)"/>
+                <text x="520" y="200" text-anchor="middle" fill="#1a4d2e" font-size="12">Dial Customer</text>
+                
+                <!-- Customer -->
+                <g transform="translate(300, 250)">
+                    <circle cx="50" cy="50" r="45" fill="#d4af37"/>
+                    <text x="50" y="45" text-anchor="middle" fill="white" font-size="30">📱</text>
+                    <text x="50" y="70" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Customer</text>
+                    <text x="50" y="120" text-anchor="middle" fill="#1a4d2e" font-size="14" font-weight="bold">Call Connects</text>
+                </g>
+                
+                <!-- Arrow 4 (curved back) -->
+                <path d="M 300 300 Q 180 340 150 280" stroke="#4f8a6d" stroke-width="4" fill="none" stroke-dasharray="5,5" marker-end="url(#arrow2)"/>
+                <text x="200" y="330" text-anchor="middle" fill="#1a4d2e" font-size="12">Recording + Log</text>
+                
+                <!-- Recording Storage -->
+                <g transform="translate(50, 380)">
+                    <rect x="0" y="0" width="180" height="80" rx="10" fill="#4f8a6d" opacity="0.9"/>
+                    <text x="90" y="35" text-anchor="middle" fill="white" font-size="28">💾</text>
+                    <text x="90" y="60" text-anchor="middle" fill="white" font-size="13" font-weight="bold">Auto Recording</text>
+                    <text x="90" y="73" text-anchor="middle" fill="white" font-size="10">Saved to NAS Storage</text>
+                </g>
+                
+                <!-- CRM Update -->
+                <g transform="translate(530, 380)">
+                    <rect x="0" y="0" width="180" height="80" rx="10" fill="#4f8a6d" opacity="0.9"/>
+                    <text x="90" y="35" text-anchor="middle" fill="white" font-size="28">📊</text>
+                    <text x="90" y="60" text-anchor="middle" fill="white" font-size="13" font-weight="bold">CRM Update</text>
+                    <text x="90" y="73" text-anchor="middle" fill="white" font-size="10">Status + Link Synced</text>
+                </g>
+                
+                <!-- Arrow markers -->
+                <defs>
+                    <marker id="arrow" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto">
+                        <polygon points="0 0, 12 6, 0 12" fill="#d4af37" />
+                    </marker>
+                    <marker id="arrow2" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto">
+                        <polygon points="0 0, 12 6, 0 12" fill="#4f8a6d" />
+                    </marker>
+                </defs>
+            </svg>
+            <p class="image-caption">Complete Outgoing Call Flow - From Agent Click to CRM Update</p>
+            
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <strong>Step 1:</strong> Agent clicks "Call" button in CRM for selected customer
+                </div>
+                <div class="flow-step">
+                    <strong>Step 2:</strong> CRM sends API request to PBX server with customer details
+                </div>
+                <div class="flow-step">
+                    <strong>Step 3:</strong> PBX checks available SIM pool and selects optimal SIM
+                </div>
+                <div class="flow-step">
+                    <strong>Step 4:</strong> Call routed through GSM Gateway using selected SIM
+                </div>
+                <div class="flow-step">
+                    <strong>Step 5:</strong> Customer's mobile rings and call connects
+                </div>
+                <div class="flow-step">
+                    <strong>Step 6:</strong> Call automatically recorded and logged with metadata
+                </div>
+                <div class="flow-step">
+                    <strong>Step 7:</strong> CRM updates call status and recording link automatically
+                </div>
+            </div>
+
+            <div class="note-box">
+                <strong>Key Features:</strong>
+                <ul style="margin: 0.5rem 0 0 1.5rem;">
+                    <li>Manual or automatic SIM selection based on usage patterns</li>
+                    <li>Recording starts automatically with full metadata capture</li>
+                    <li>Real-time call status updates to CRM</li>
+                    <li>Intelligent SIM rotation to prevent blocking</li>
+                </ul>
+            </div>
+
+            <h3>B. Incoming Call Management</h3>
+            
+            <!-- Incoming Call Flow Illustration -->
+            <svg class="diagram-image" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="incomingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#d4af37;stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#c19b2d;stop-opacity:0.9" />
+                    </linearGradient>
+                </defs>
+                
+                <!-- Customer Calling -->
+                <g transform="translate(50, 50)">
+                    <circle cx="50" cy="50" r="45" fill="url(#incomingGrad)" class="glow"/>
+                    <text x="50" y="45" text-anchor="middle" fill="white" font-size="30">📞</text>
+                    <text x="50" y="70" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Customer</text>
+                    <text x="50" y="120" text-anchor="middle" fill="#1a4d2e" font-size="14" font-weight="bold">Calls Your Number</text>
+                </g>
+                
+                <!-- Arrow -->
+                <path d="M 150 100 L 280 100" stroke="#1a4d2e" stroke-width="4" fill="none" marker-end="url(#arrowGreen)"/>
+                <text x="215" y="90" text-anchor="middle" fill="#1a4d2e" font-size="12">Incoming Call</text>
+                
+                <!-- GSM Gateway -->
+                <g transform="translate(280, 50)">
+                    <rect x="0" y="0" width="120" height="100" rx="10" fill="url(#flowGrad)"/>
+                    <text x="60" y="40" text-anchor="middle" fill="white" font-size="28">📡</text>
+                    <text x="60" y="70" text-anchor="middle" fill="white" font-size="13" font-weight="bold">GSM Gateway</text>
+                    <text x="60" y="85" text-anchor="middle" fill="white" font-size="10">Receives Call</text>
+                </g>
+                
+                <!-- Arrow -->
+                <path d="M 400 100 L 530 100" stroke="#1a4d2e" stroke-width="4" fill="none" marker-end="url(#arrowGreen)"/>
+                <text x="465" y="90" text-anchor="middle" fill="#1a4d2e" font-size="12">Forward</text>
+                
+                <!-- PBX Server -->
+                <g transform="translate(530, 50)">
+                    <rect x="0" y="0" width="120" height="100" rx="10" fill="url(#flowGrad)"/>
+                    <text x="60" y="40" text-anchor="middle" fill="white" font-size="28">🖥️</text>
+                    <text x="60" y="70" text-anchor="middle" fill="white" font-size="13" font-weight="bold">PBX Server</text>
+                    <text x="60" y="85" text-anchor="middle" fill="white" font-size="10">Identify DID</text>
+                </g>
+                
+                <!-- Arrow down -->
+                <path d="M 590 150 L 590 220" stroke="#1a4d2e" stroke-width="4" fill="none" marker-end="url(#arrowGreen)"/>
+                <text x="620" y="185" fill="#1a4d2e" font-size="12">Route</text>
+                
+                <!-- Call Queue -->
+                <g transform="translate(480, 230)">
+                    <rect x="0" y="0" width="220" height="80" rx="10" fill="url(#flowGrad)"/>
+                    <text x="110" y="35" text-anchor="middle" fill="white" font-size="28">🎯</text>
+                    <text x="110" y="60" text-anchor="middle" fill="white" font-size="13" font-weight="bold">Call Queue / Agent</text>
+                    <text x="110" y="73" text-anchor="middle" fill="white" font-size="10">Smart Distribution</text>
+                </g>
+                
+                <!-- Arrows to Agent and CRM -->
+                <path d="M 480 270 L 280 270" stroke="#1a4d2e" stroke-width="4" fill="none" marker-end="url(#arrowGreen)"/>
+                <path d="M 590 310 L 420 370" stroke="#4f8a6d" stroke-width="4" fill="none" stroke-dasharray="5,5" marker-end="url(#arrowGreen)"/>
+                
+                <!-- Agent Receives -->
+                <g transform="translate(150, 220)">
+                    <circle cx="50" cy="50" r="45" fill="url(#incomingGrad)"/>
+                    <text x="50" y="45" text-anchor="middle" fill="white" font-size="30">🎧</text>
+                    <text x="50" y="70" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Agent</text>
+                    <text x="50" y="120" text-anchor="middle" fill="#1a4d2e" font-size="14" font-weight="bold">Answers Call</text>
+                </g>
+                
+                <!-- CRM Popup -->
+                <g transform="translate(300, 370)">
+                    <rect x="0" y="0" width="180" height="70" rx="10" fill="#4f8a6d" opacity="0.9"/>
+                    <text x="90" y="30" text-anchor="middle" fill="white" font-size="24">📋</text>
+                    <text x="90" y="52" text-anchor="middle" fill="white" font-size="13" font-weight="bold">CRM Auto-Popup</text>
+                    <text x="90" y="64" text-anchor="middle" fill="white" font-size="10">Customer Profile</text>
+                </g>
+                
+                <!-- Recording Indicator -->
+                <g transform="translate(50, 370)">
+                    <rect x="0" y="0" width="160" height="70" rx="10" fill="#d4af37" opacity="0.9"/>
+                    <text x="80" y="30" text-anchor="middle" fill="white" font-size="24">🎙️</text>
+                    <text x="80" y="52" text-anchor="middle" fill="white" font-size="13" font-weight="bold">Auto Recording</text>
+                    <text x="80" y="64" text-anchor="middle" fill="white" font-size="10">+ Call Tagging</text>
+                </g>
+                
+                <defs>
+                    <marker id="arrowGreen" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto">
+                        <polygon points="0 0, 12 6, 0 12" fill="#1a4d2e" />
+                    </marker>
+                </defs>
+            </svg>
+            <p class="image-caption">Incoming Call Flow - Professional Call Handling with CRM Integration</p>
+            
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <strong>Step 1:</strong> Customer calls any of your enabled SIM numbers
+                </div>
+                <div class="flow-step">
+                    <strong>Step 2:</strong> GSM Gateway receives call and forwards to PBX
+                </div>
+                <div class="flow-step">
+                    <strong>Step 3:</strong> PBX identifies the dialed number (DID)
+                </div>
+                <div class="flow-step">
+                    <strong>Step 4:</strong> Call routed to appropriate queue or agent based on rules
+                </div>
+                <div class="flow-step">
+                    <strong>Step 5:</strong> CRM auto-popup displays customer record (if existing)
+                </div>
+                <div class="flow-step">
+                    <strong>Step 6:</strong> Call recording enabled and properly tagged
+                </div>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-title">✅ Missed Call Logging</div>
+                    <p>All missed calls automatically logged for follow-up</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📊 Call Analytics</div>
+                    <p>Detailed analytics on call volumes and patterns</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🎯 Smart Distribution</div>
+                    <p>Queue-based intelligent call distribution</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- WhatsApp Integration -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">05</div>
+                <h2>WhatsApp Business API Integration</h2>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="color: white; margin-top: 0;">WhatsApp Communication Flow</h3>
+                <div class="flow-diagram" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3);">
+                    <div class="flow-step" style="background: rgba(255,255,255,0.1); border-left-color: var(--accent); color: white;">
+                        <strong>Customer WhatsApp Message</strong> → Received by WhatsApp Business API
+                    </div>
+                    <div class="flow-step" style="background: rgba(255,255,255,0.1); border-left-color: var(--accent); color: white;">
+                        <strong>Webhook Trigger</strong> → Automatically sent to CRM webhook endpoint
+                    </div>
+                    <div class="flow-step" style="background: rgba(255,255,255,0.1); border-left-color: var(--accent); color: white;">
+                        <strong>CRM Storage</strong> → Message stored and linked to customer profile
+                    </div>
+                    <div class="flow-step" style="background: rgba(255,255,255,0.1); border-left-color: var(--accent); color: white;">
+                        <strong>Agent Notification</strong> → Real-time alert to assigned agent
+                    </div>
+                    <div class="flow-step" style="background: rgba(255,255,255,0.1); border-left-color: var(--accent); color: white;">
+                        <strong>Agent Reply</strong> → Sent via API back to customer's WhatsApp
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">💾 Complete Chat History</div>
+                    <p>All WhatsApp conversations stored in CRM with full searchability</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">👤 Customer Profile Linking</div>
+                    <p>Chats automatically linked to lead/customer profiles</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🚫 No Manual Management</div>
+                    <p>Eliminate manual WhatsApp handling across multiple devices</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📈 Analytics & Insights</div>
+                    <p>Track response times, conversation metrics, and engagement</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hardware & Pricing -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">06</div>
+                <h2>GSM Gateway Hardware & Investment</h2>
+            </div>
+
+            <h3>32-Port GSM Gateway Options (India Market)</h3>
+            
+            <!-- GSM Gateway Visualization -->
+            <svg class="diagram-image" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="deviceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#2c3e50;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#34495e;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                
+                <!-- GSM Gateway Device -->
+                <g transform="translate(100, 50)">
+                    <!-- Device Body -->
+                    <rect x="0" y="0" width="600" height="120" rx="10" fill="url(#deviceGrad)" stroke="#1a4d2e" stroke-width="3"/>
+                    
+                    <!-- Front Panel -->
+                    <rect x="15" y="15" width="570" height="90" rx="5" fill="#2c3e50"/>
+                    
+                    <!-- Brand Label -->
+                    <rect x="30" y="25" width="120" height="30" rx="5" fill="#1a4d2e"/>
+                    <text x="90" y="47" text-anchor="middle" fill="white" font-size="16" font-weight="bold">GSM-32</text>
+                    
+                    <!-- LED Indicators -->
+                    <circle cx="180" cy="40" r="5" fill="#4ade80" class="pulse"/>
+                    <circle cx="200" cy="40" r="5" fill="#4ade80" class="pulse"/>
+                    <circle cx="220" cy="40" r="5" fill="#fbbf24" class="pulse"/>
+                    
+                    <!-- SIM Slots Grid (8x4 = 32) -->
+                    <g transform="translate(30, 65)">
+                        <!-- Row 1 -->
+                        <rect x="0" y="0" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="20" y="0" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="40" y="0" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="60" y="0" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="80" y="0" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="100" y="0" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="120" y="0" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="140" y="0" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        
+                        <!-- Row 2 -->
+                        <rect x="0" y="15" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="20" y="15" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="40" y="15" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="60" y="15" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="80" y="15" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="100" y="15" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="120" y="15" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="140" y="15" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        
+                        <!-- Continue pattern for 4 rows total -->
+                        <rect x="170" y="0" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="190" y="0" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="210" y="0" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="230" y="0" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="250" y="0" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="270" y="0" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="290" y="0" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="310" y="0" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        
+                        <rect x="170" y="15" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="190" y="15" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="210" y="15" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="230" y="15" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="250" y="15" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="270" y="15" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="290" y="15" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                        <rect x="310" y="15" width="15" height="10" rx="2" fill="#4f8a6d" opacity="0.8"/>
+                    </g>
+                    
+                    <!-- Label -->
+                    <text x="500" y="40" text-anchor="middle" fill="#d4af37" font-size="14" font-weight="bold">32 SIM SLOTS</text>
+                    <text x="500" y="58" text-anchor="middle" fill="#4f8a6d" font-size="11">Per Gateway</text>
+                    
+                    <!-- Ethernet/Network Port -->
+                    <rect x="520" y="70" width="50" height="25" rx="3" fill="#1a4d2e"/>
+                    <text x="545" y="87" text-anchor="middle" fill="white" font-size="10">ETH</text>
+                </g>
+                
+                <!-- Quantity Indicator -->
+                <g transform="translate(250, 200)">
+                    <text x="150" y="30" text-anchor="middle" fill="#1a4d2e" font-size="40" font-weight="bold">× 8</text>
+                    <text x="150" y="60" text-anchor="middle" fill="#4f8a6d" font-size="18">Gateways Required</text>
+                    <text x="150" y="85" text-anchor="middle" fill="#1a4d2e" font-size="16" font-weight="bold">= 256 Total SIM Slots</text>
+                </g>
+                
+                <!-- Connection Icons -->
+                <g transform="translate(100, 280)">
+                    <circle cx="100" cy="50" r="40" fill="url(#flowGrad)"/>
+                    <text x="100" y="60" text-anchor="middle" fill="white" font-size="35">🖥️</text>
+                    <text x="100" y="100" text-anchor="middle" fill="#1a4d2e" font-size="12" font-weight="bold">PBX Server</text>
+                </g>
+                
+                <path d="M 200 330 L 280 330" stroke="#d4af37" stroke-width="4" marker-end="url(#arrow)"/>
+                
+                <g transform="translate(280, 280)">
+                    <circle cx="100" cy="50" r="40" fill="url(#flowGrad)"/>
+                    <text x="100" y="60" text-anchor="middle" fill="white" font-size="35">📡</text>
+                    <text x="100" y="100" text-anchor="middle" fill="#1a4d2e" font-size="12" font-weight="bold">GSM Gateways</text>
+                </g>
+                
+                <path d="M 460 330 L 540 330" stroke="#d4af37" stroke-width="4" marker-end="url(#arrow)"/>
+                
+                <g transform="translate(540, 280)">
+                    <circle cx="100" cy="50" r="40" fill="url(#flowGrad)"/>
+                    <text x="100" y="60" text-anchor="middle" fill="white" font-size="35">📱</text>
+                    <text x="100" y="100" text-anchor="middle" fill="#1a4d2e" font-size="12" font-weight="bold">Customer Calls</text>
+                </g>
+            </svg>
+            <p class="image-caption">32-Port GSM Gateway Configuration - Professional Grade Hardware</p>
+            
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th>Brand</th>
+                        <th>Model Type</th>
+                        <th>Approximate Price (INR)</th>
+                        <th>Key Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Dinstar</strong></td>
+                        <td>32 Port GSM</td>
+                        <td>₹90,000 - ₹1,40,000</td>
+                        <td>Reliable, cost-effective, proven track record</td>
+                    </tr>
+                    <tr>
+                        <td><strong>OpenVox</strong></td>
+                        <td>32 Port GSM</td>
+                        <td>₹1,20,000 - ₹1,80,000</td>
+                        <td>Premium quality, advanced features</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Synway</strong></td>
+                        <td>32 Port GSM</td>
+                        <td>₹80,000 - ₹1,20,000</td>
+                        <td>Budget-friendly, good performance</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4G LTE Industrial</strong></td>
+                        <td>32 Port</td>
+                        <td>₹1,80,000 - ₹3,00,000</td>
+                        <td>Future-proof, highest performance</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Complete Infrastructure Requirements</h3>
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Purpose</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>32-Port GSM Gateway</strong></td>
+                        <td>8 Units</td>
+                        <td>256 SIM slots total capacity</td>
+                        <td>Supports 250+ SIMs with room for growth</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PBX Server (Primary)</strong></td>
+                        <td>1 Unit</td>
+                        <td>Main call processing engine</td>
+                        <td>16-core CPU, 32GB RAM recommended</td>
+                    </tr>
+                    <tr>
+                        <td><strong>HA Server (Optional)</strong></td>
+                        <td>1 Unit</td>
+                        <td>High availability backup</td>
+                        <td>Strongly recommended for business continuity</td>
+                    </tr>
+                    <tr>
+                        <td><strong>NAS Storage</strong></td>
+                        <td>1 Unit</td>
+                        <td>Call recording storage</td>
+                        <td>5-10TB minimum, scalable</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dual ISP Connection</strong></td>
+                        <td>2 Lines</td>
+                        <td>Network redundancy</td>
+                        <td>Fiber/broadband with static IP</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Server Rack & Cooling</strong></td>
+                        <td>1 Set</td>
+                        <td>Hardware organization</td>
+                        <td>Professional setup with proper ventilation</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SIM Management -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">07</div>
+                <h2>Intelligent SIM Usage & Rotation</h2>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="color: white; margin-top: 0;">Smart SIM Management Logic</h3>
+                <p style="color: white;">Our system implements intelligent SIM rotation to prevent telecom blocking and ensure optimal performance:</p>
+                
+                <!-- SIM Rotation Visualization -->
+                <svg class="icon-illustration" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="simGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.3" />
+                            <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.1" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Central Hub -->
+                    <circle cx="300" cy="200" r="60" fill="url(#simGrad)" stroke="white" stroke-width="3"/>
+                    <text x="300" y="195" text-anchor="middle" fill="white" font-size="35">⚙️</text>
+                    <text x="300" y="220" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Smart</text>
+                    <text x="300" y="235" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Rotation</text>
+                    
+                    <!-- SIM Cards arranged in circle -->
+                    <!-- SIM 1 - Active -->
+                    <g transform="translate(300, 50)">
+                        <rect x="-30" y="-40" width="60" height="80" rx="8" fill="#4ade80" opacity="0.9"/>
+                        <text x="0" y="0" text-anchor="middle" fill="white" font-size="30">📱</text>
+                        <text x="0" y="25" text-anchor="middle" fill="white" font-size="10" font-weight="bold">SIM 1</text>
+                        <text x="0" y="38" text-anchor="middle" fill="white" font-size="8">✓ Active</text>
+                    </g>
+                    
+                    <!-- SIM 2 - Active -->
+                    <g transform="translate(480, 120)">
+                        <rect x="-30" y="-40" width="60" height="80" rx="8" fill="#4ade80" opacity="0.9"/>
+                        <text x="0" y="0" text-anchor="middle" fill="white" font-size="30">📱</text>
+                        <text x="0" y="25" text-anchor="middle" fill="white" font-size="10" font-weight="bold">SIM 2</text>
+                        <text x="0" y="38" text-anchor="middle" fill="white" font-size="8">✓ Active</text>
+                    </g>
+                    
+                    <!-- SIM 3 - Warning -->
+                    <g transform="translate(480, 280)">
+                        <rect x="-30" y="-40" width="60" height="80" rx="8" fill="#fbbf24" opacity="0.9"/>
+                        <text x="0" y="0" text-anchor="middle" fill="white" font-size="30">📱</text>
+                        <text x="0" y="25" text-anchor="middle" fill="white" font-size="10" font-weight="bold">SIM 3</text>
+                        <text x="0" y="38" text-anchor="middle" fill="white" font-size="8">⚠ Near Limit</text>
+                    </g>
+                    
+                    <!-- SIM 4 - Resting -->
+                    <g transform="translate(300, 350)">
+                        <rect x="-30" y="-40" width="60" height="80" rx="8" fill="#94a3b8" opacity="0.9"/>
+                        <text x="0" y="0" text-anchor="middle" fill="white" font-size="30">📱</text>
+                        <text x="0" y="25" text-anchor="middle" fill="white" font-size="10" font-weight="bold">SIM 4</text>
+                        <text x="0" y="38" text-anchor="middle" fill="white" font-size="8">⏸ Resting</text>
+                    </g>
+                    
+                    <!-- SIM 5 - Active -->
+                    <g transform="translate(120, 280)">
+                        <rect x="-30" y="-40" width="60" height="80" rx="8" fill="#4ade80" opacity="0.9"/>
+                        <text x="0" y="0" text-anchor="middle" fill="white" font-size="30">📱</text>
+                        <text x="0" y="25" text-anchor="middle" fill="white" font-size="10" font-weight="bold">SIM 5</text>
+                        <text x="0" y="38" text-anchor="middle" fill="white" font-size="8">✓ Active</text>
+                    </g>
+                    
+                    <!-- SIM 6 - Active -->
+                    <g transform="translate(120, 120)">
+                        <rect x="-30" y="-40" width="60" height="80" rx="8" fill="#4ade80" opacity="0.9"/>
+                        <text x="0" y="0" text-anchor="middle" fill="white" font-size="30">📱</text>
+                        <text x="0" y="25" text-anchor="middle" fill="white" font-size="10" font-weight="bold">SIM 6</text>
+                        <text x="0" y="38" text-anchor="middle" fill="white" font-size="8">✓ Active</text>
+                    </g>
+                    
+                    <!-- Connection lines -->
+                    <line x1="300" y1="140" x2="300" y2="90" stroke="white" stroke-width="2" opacity="0.5"/>
+                    <line x1="360" y1="200" x2="420" y2="120" stroke="white" stroke-width="2" opacity="0.5"/>
+                    <line x1="360" y1="200" x2="420" y2="280" stroke="white" stroke-width="2" opacity="0.5"/>
+                    <line x1="300" y1="260" x2="300" y2="310" stroke="white" stroke-width="2" opacity="0.5"/>
+                    <line x1="240" y1="200" x2="180" y2="280" stroke="white" stroke-width="2" opacity="0.5"/>
+                    <line x1="240" y1="200" x2="180" y2="120" stroke="white" stroke-width="2" opacity="0.5"/>
+                    
+                    <!-- Rotation arrows -->
+                    <path d="M 300 130 Q 380 100 450 120" stroke="#d4af37" stroke-width="3" fill="none" opacity="0.7" marker-end="url(#arrowWhite)" class="pulse"/>
+                    
+                    <defs>
+                        <marker id="arrowWhite" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                            <polygon points="0 0, 10 5, 0 10" fill="#d4af37" />
+                        </marker>
+                    </defs>
+                </svg>
+                <p class="image-caption" style="color: rgba(255,255,255,0.8);">Intelligent SIM Rotation System - 256 SIMs Managed Automatically</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">📊 Per-SIM Call Monitoring</div>
+                    <p>Real-time tracking of call count for each SIM card</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">⚙️ Configurable Thresholds</div>
+                    <p>Set daily/hourly call limits per SIM to stay within carrier guidelines</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🔄 Automatic Rotation</div>
+                    <p>System auto-disables SIM after threshold and rotates to next available</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">💚 Health Status Dashboard</div>
+                    <p>Visual dashboard showing SIM health, usage, and availability</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">⚡ Load Balancing</div>
+                    <p>Even distribution of call volume across all SIMs</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📈 Lifespan Optimization</div>
+                    <p>Prevent premature SIM blocking and extend operational life</p>
+                </div>
+            </div>
+
+            <div class="note-box">
+                <strong>Benefits of Intelligent SIM Rotation:</strong>
+                <ul style="margin: 0.5rem 0 0 1.5rem;">
+                    <li>Prevent telecom operator blocking due to high volume</li>
+                    <li>Maintain optimal call success rates</li>
+                    <li>Extend SIM card operational lifespan</li>
+                    <li>Reduce replacement costs and downtime</li>
+                    <li>Automated management with minimal manual intervention</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Call Recording -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">08</div>
+                <h2>Call Recording & Storage System</h2>
+            </div>
+
+            <h3>Comprehensive Recording Architecture</h3>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">🗄️ Centralized Storage</div>
+                    <p>NAS/RAID storage for reliability and scalability</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📁 Organized Structure</div>
+                    <p>Folder hierarchy by date and SIM for easy retrieval</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🔐 Role-Based Access</div>
+                    <p>Secure access control based on user permissions</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">💾 Automated Backups</div>
+                    <p>Daily automated backups to prevent data loss</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">⏰ Retention Policies</div>
+                    <p>Configurable retention periods based on compliance needs</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🔍 Quick Search</div>
+                    <p>Search by date, SIM, agent, customer, or call ID</p>
+                </div>
+            </div>
+
+            <h3>Storage Planning & Directory Structure</h3>
+            
+            <!-- Storage Visualization -->
+            <svg class="diagram-image" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="storageGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#1a4d2e;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#4f8a6d;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                
+                <!-- NAS Storage Device -->
+                <g transform="translate(100, 50)">
+                    <rect x="0" y="0" width="250" height="200" rx="15" fill="url(#storageGrad)" stroke="#d4af37" stroke-width="3"/>
+                    
+                    <!-- Drive Bays -->
+                    <rect x="20" y="30" width="210" height="30" rx="5" fill="#2c3e50" opacity="0.8"/>
+                    <rect x="20" y="70" width="210" height="30" rx="5" fill="#2c3e50" opacity="0.8"/>
+                    <rect x="20" y="110" width="210" height="30" rx="5" fill="#2c3e50" opacity="0.8"/>
+                    <rect x="20" y="150" width="210" height="30" rx="5" fill="#2c3e50" opacity="0.8"/>
+                    
+                    <!-- LED Indicators -->
+                    <circle cx="35" cy="45" r="4" fill="#4ade80" class="pulse"/>
+                    <circle cx="35" cy="85" r="4" fill="#4ade80" class="pulse"/>
+                    <circle cx="35" cy="125" r="4" fill="#4ade80" class="pulse"/>
+                    <circle cx="35" cy="165" r="4" fill="#4ade80" class="pulse"/>
+                    
+                    <!-- Labels -->
+                    <text x="125" y="50" text-anchor="middle" fill="white" font-size="12">RAID Array 1</text>
+                    <text x="125" y="90" text-anchor="middle" fill="white" font-size="12">RAID Array 2</text>
+                    <text x="125" y="130" text-anchor="middle" fill="white" font-size="12">RAID Array 3</text>
+                    <text x="125" y="170" text-anchor="middle" fill="white" font-size="12">RAID Array 4</text>
+                    
+                    <text x="125" y="220" text-anchor="middle" fill="#d4af37" font-size="16" font-weight="bold">NAS Storage</text>
+                    <text x="125" y="240" text-anchor="middle" fill="white" font-size="12">5-10 TB Capacity</text>
+                </g>
+                
+                <!-- Arrow -->
+                <path d="M 350 150 L 420 150" stroke="#d4af37" stroke-width="3" marker-end="url(#arrow)"/>
+                
+                <!-- Folder Structure -->
+                <g transform="translate(420, 50)">
+                    <rect x="0" y="0" width="350" height="350" rx="12" fill="#f5f7f6" stroke="#1a4d2e" stroke-width="2"/>
+                    
+                    <!-- Title -->
+                    <text x="175" y="30" text-anchor="middle" fill="#1a4d2e" font-size="16" font-weight="bold">Directory Structure</text>
+                    
+                    <!-- Folder Tree -->
+                    <text x="20" y="60" fill="#1a4d2e" font-size="13" font-family="monospace">📁 /recordings/</text>
+                    
+                    <line x1="35" y1="70" x2="35" y2="140" stroke="#4f8a6d" stroke-width="2"/>
+                    <text x="50" y="85" fill="#1a4d2e" font-size="12" font-family="monospace">📁 2026/</text>
+                    
+                    <line x1="65" y1="95" x2="65" y2="165" stroke="#4f8a6d" stroke-width="2"/>
+                    <text x="80" y="110" fill="#1a4d2e" font-size="12" font-family="monospace">📁 01/ (January)</text>
+                    <text x="80" y="130" fill="#1a4d2e" font-size="12" font-family="monospace">📁 02/ (February)</text>
+                    
+                    <line x1="95" y1="140" x2="95" y2="240" stroke="#4f8a6d" stroke-width="2"/>
+                    <text x="110" y="155" fill="#1a4d2e" font-size="11" font-family="monospace">📁 sim_9876543210/</text>
+                    
+                    <line x1="125" y1="165" x2="125" y2="235" stroke="#d4af37" stroke-width="1.5"/>
+                    <text x="140" y="180" fill="#4f8a6d" font-size="10" font-family="monospace">🎵 call_001.wav</text>
+                    <text x="140" y="197" fill="#4f8a6d" font-size="10" font-family="monospace">🎵 call_002.wav</text>
+                    <text x="140" y="214" fill="#4f8a6d" font-size="10" font-family="monospace">🎵 call_003.wav</text>
+                    <text x="140" y="231" fill="#4f8a6d" font-size="10" font-family="monospace">🎵 call_004.wav</text>
+                    
+                    <text x="110" y="260" fill="#1a4d2e" font-size="11" font-family="monospace">📁 sim_9876543211/</text>
+                    <text x="140" y="280" fill="#4f8a6d" font-size="10" font-family="monospace">🎵 call_005.wav</text>
+                    
+                    <text x="80" y="310" fill="#1a4d2e" font-size="12" font-family="monospace">📁 03/ (March)</text>
+                    <text x="80" y="330" fill="#1a4d2e" font-size="12" font-family="monospace">...</text>
+                </g>
+                
+                <!-- Info Box -->
+                <g transform="translate(50, 290)">
+                    <rect x="0" y="0" width="300" height="100" rx="10" fill="#4f8a6d" opacity="0.9"/>
+                    <text x="150" y="25" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Storage Features</text>
+                    <text x="20" y="48" fill="white" font-size="11">✓ Organized by Date & SIM</text>
+                    <text x="20" y="65" fill="white" font-size="11">✓ Automated Daily Backups</text>
+                    <text x="20" y="82" fill="white" font-size="11">✓ Role-Based Access Control</text>
+                </g>
+            </svg>
+            <p class="image-caption">Centralized Call Recording Storage with Organized Structure</p>
+            
+            <div class="architecture-diagram">
+                <div style="background: white; padding: 1.5rem; border-radius: 10px; font-family: monospace; font-size: 0.95rem;">
+                    <div><strong>/recordings/</strong></div>
+                    <div style="margin-left: 1.5rem;">├── <strong>2026/</strong></div>
+                    <div style="margin-left: 3rem;">├── <strong>02/</strong> (February)</div>
+                    <div style="margin-left: 4.5rem;">├── <strong>sim_9876543210/</strong></div>
+                    <div style="margin-left: 6rem;">├── uniqueid_001.wav</div>
+                    <div style="margin-left: 6rem;">├── uniqueid_002.wav</div>
+                    <div style="margin-left: 6rem;">└── uniqueid_003.wav</div>
+                    <div style="margin-left: 4.5rem;">└── <strong>sim_9876543211/</strong></div>
+                    <div style="margin-left: 6rem;">└── uniqueid_004.wav</div>
+                </div>
+            </div>
+
+            <div class="note-box">
+                <strong>Storage Capacity Estimation:</strong>
+                <ul style="margin: 0.5rem 0 0 1.5rem;">
+                    <li>Average call duration: 3-5 minutes</li>
+                    <li>Approximate file size: 2-3 MB per call</li>
+                    <li>250 agents with high call volume</li>
+                    <li><strong>Recommended:</strong> Minimum 5-10 TB scalable storage</li>
+                    <li>Plan for 1-2 years of recording retention</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Network Infrastructure -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">09</div>
+                <h2>Network Infrastructure & Redundancy</h2>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="color: white; margin-top: 0;">Why Dual ISP is Critical</h3>
+                <p style="color: white;">For real estate operations where every call matters, network redundancy is not optional—it's essential. A single connection failure could mean lost leads, missed opportunities, and revenue impact.</p>
+                
+                <!-- Network Redundancy Diagram -->
+                <svg class="icon-illustration" viewBox="0 0 700 350" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="networkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.2" />
+                            <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.05" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- ISP 1 -->
+                    <g transform="translate(50, 50)">
+                        <rect x="0" y="0" width="150" height="80" rx="10" fill="url(#networkGrad)" stroke="white" stroke-width="2"/>
+                        <text x="75" y="35" text-anchor="middle" fill="white" font-size="30">🌐</text>
+                        <text x="75" y="60" text-anchor="middle" fill="white" font-size="14" font-weight="bold">ISP 1 - Fiber</text>
+                        <circle cx="140" cy="8" r="6" fill="#4ade80" class="pulse"/>
+                    </g>
+                    
+                    <!-- ISP 2 -->
+                    <g transform="translate(50, 220)">
+                        <rect x="0" y="0" width="150" height="80" rx="10" fill="url(#networkGrad)" stroke="white" stroke-width="2"/>
+                        <text x="75" y="35" text-anchor="middle" fill="white" font-size="30">📡</text>
+                        <text x="75" y="60" text-anchor="middle" fill="white" font-size="14" font-weight="bold">ISP 2 - Broadband</text>
+                        <circle cx="140" cy="8" r="6" fill="#4ade80" class="pulse"/>
+                    </g>
+                    
+                    <!-- Arrows to Load Balancer -->
+                    <path d="M 200 90 L 300 175" stroke="white" stroke-width="3" marker-end="url(#arrowNet)"/>
+                    <path d="M 200 260 L 300 185" stroke="white" stroke-width="3" marker-end="url(#arrowNet)"/>
+                    
+                    <!-- Load Balancer -->
+                    <g transform="translate(300, 135)">
+                        <rect x="0" y="0" width="180" height="90" rx="10" fill="#d4af37" stroke="white" stroke-width="3"/>
+                        <text x="90" y="40" text-anchor="middle" fill="white" font-size="32">⚖️</text>
+                        <text x="90" y="68" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Load Balancer</text>
+                        <text x="90" y="82" text-anchor="middle" fill="white" font-size="10">Auto Failover</text>
+                    </g>
+                    
+                    <!-- Arrow to Server -->
+                    <path d="M 480 180 L 550 180" stroke="white" stroke-width="4" marker-end="url(#arrowNet)" class="shimmer"/>
+                    
+                    <!-- Server -->
+                    <g transform="translate(550, 140)">
+                        <rect x="0" y="0" width="140" height="80" rx="10" fill="url(#networkGrad)" stroke="white" stroke-width="2"/>
+                        <text x="70" y="35" text-anchor="middle" fill="white" font-size="30">🖥️</text>
+                        <text x="70" y="58" text-anchor="middle" fill="white" font-size="14" font-weight="bold">PBX System</text>
+                        <circle cx="130" cy="8" r="6" fill="#4ade80" class="pulse"/>
+                    </g>
+                    
+                    <!-- Uptime Indicator -->
+                    <g transform="translate(250, 20)">
+                        <rect x="0" y="0" width="200" height="50" rx="8" fill="rgba(74, 222, 128, 0.2)" stroke="#4ade80" stroke-width="2"/>
+                        <text x="100" y="22" text-anchor="middle" fill="white" font-size="20" font-weight="bold">99.9% Uptime</text>
+                        <text x="100" y="40" text-anchor="middle" fill="white" font-size="11">With Dual ISP</text>
+                    </g>
+                    
+                    <!-- Status Labels -->
+                    <text x="125" y="165" text-anchor="middle" fill="white" font-size="11">✓ Primary</text>
+                    <text x="125" y="335" text-anchor="middle" fill="white" font-size="11">✓ Backup</text>
+                    
+                    <defs>
+                        <marker id="arrowNet" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto">
+                            <polygon points="0 0, 12 6, 0 12" fill="white" />
+                        </marker>
+                    </defs>
+                </svg>
+                <p class="image-caption" style="color: rgba(255,255,255,0.8);">Dual ISP Configuration - Maximum Uptime & Reliability</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">🌐 Dual ISP Connections</div>
+                    <p>Minimum 2 independent internet connections (fiber + broadband/4G)</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">⚖️ Load Balancer</div>
+                    <p>Intelligent traffic distribution and automatic failover</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🔢 Static IP Addresses</div>
+                    <p>Recommended for stable connections and easier management</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🛡️ Security Layer</div>
+                    <p>Firewall with SIP-specific security rules and DDoS protection</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📊 Bandwidth Monitoring</div>
+                    <p>Real-time monitoring and alerts for connection issues</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🔄 Automatic Failover</div>
+                    <p>Seamless switching if primary connection fails</p>
+                </div>
+            </div>
+
+            <div class="note-box">
+                <strong>Network Configuration Best Practices:</strong>
+                <ul style="margin: 0.5rem 0 0 1.5rem;">
+                    <li>Dedicated bandwidth for VoIP traffic (QoS enabled)</li>
+                    <li>Minimum 50 Mbps upload/download per connection</li>
+                    <li>Low latency connections (<50ms) for voice quality</li>
+                    <li>SIP ALG disabled on routers for better compatibility</li>
+                    <li>VPN access for remote administration and monitoring</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Server Specifications -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">10</div>
+                <h2>Server Specifications</h2>
+            </div>
+
+            <h3>Recommended Server Configuration (250-300 SIM Capacity)</h3>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">⚙️ CPU</div>
+                    <p>12-16 Core Processor (Intel Xeon or AMD EPYC)</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🎯 RAM</div>
+                    <p>32 GB DDR4 ECC Memory (minimum)</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">💾 Storage</div>
+                    <p>NVMe SSD (500GB minimum for OS and applications)</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🗄️ Database</div>
+                    <p>Separate DB instance recommended for better performance</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🐧 Operating System</div>
+                    <p>Linux - Ubuntu Server 22.04 LTS or CentOS 8</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🔄 Redundancy</div>
+                    <p>RAID configuration for OS drives (RAID 1 or 10)</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="color: white; margin-top: 0;">Optional: High Availability (HA) Setup</h3>
+                <p style="color: white;">For mission-critical operations, we recommend an Active-Passive High Availability configuration:</p>
+                <ul class="feature-list" style="color: white;">
+                    <li style="border-bottom-color: rgba(255,255,255,0.2);">Primary PBX server handles all active calls</li>
+                    <li style="border-bottom-color: rgba(255,255,255,0.2);">Secondary server in standby mode with real-time synchronization</li>
+                    <li style="border-bottom-color: rgba(255,255,255,0.2);">Automatic failover in case of primary server failure</li>
+                    <li style="border-bottom-color: rgba(255,255,255,0.2);">Minimal downtime (typically under 30 seconds)</li>
+                    <li style="border-bottom-color: rgba(255,255,255,0.2);">Shared storage for call recordings and configuration</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Implementation Timeline -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">11</div>
+                <h2>Implementation Timeline & Phases</h2>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-title">Phase 1: Planning & Procurement (Week 1-2)</div>
+                    <ul>
+                        <li>Finalize hardware specifications and vendors</li>
+                        <li>Order GSM gateways, servers, and networking equipment</li>
+                        <li>Plan network infrastructure and rack setup</li>
+                        <li>Procure SIM cards and test activation</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Phase 2: Infrastructure Setup (Week 3-4)</div>
+                    <ul>
+                        <li>Install and configure server rack and cooling</li>
+                        <li>Set up dual ISP connections with load balancer</li>
+                        <li>Install and cable GSM gateways</li>
+                        <li>Configure NAS storage system</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Phase 3: Software Configuration (Week 4-5)</div>
+                    <ul>
+                        <li>Install and configure Asterisk PBX</li>
+                        <li>Set up FreePBX management interface</li>
+                        <li>Configure SIP trunks to GSM gateways</li>
+                        <li>Implement call recording system</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Phase 4: CRM Integration (Week 5-6)</div>
+                    <ul>
+                        <li>Develop API connectors between CRM and PBX</li>
+                        <li>Configure click-to-call functionality</li>
+                        <li>Set up WhatsApp Business API webhooks</li>
+                        <li>Implement call status synchronization</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Phase 5: Testing & Optimization (Week 7)</div>
+                    <ul>
+                        <li>Comprehensive testing of all call flows</li>
+                        <li>Load testing with multiple concurrent calls</li>
+                        <li>Fine-tune call routing and quality</li>
+                        <li>Optimize SIM rotation algorithms</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">Phase 6: Training & Go-Live (Week 8)</div>
+                    <ul>
+                        <li>Administrator training on FreePBX management</li>
+                        <li>Agent training on new calling system</li>
+                        <li>Phased rollout to production</li>
+                        <li>Post-implementation support and monitoring</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Benefits -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">12</div>
+                <h2>Key Business Benefits</h2>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">💰</div>
+                    <h4 style="margin: 1rem 0 0.5rem; color: var(--primary);">Complete Cost Control</h4>
+                    <p>One-time investment with predictable operating costs. No per-minute charges or vendor lock-in.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🏢</div>
+                    <h4 style="margin: 1rem 0 0.5rem; color: var(--primary);">Full System Ownership</h4>
+                    <p>Your infrastructure, your control. No dependency on third-party cloud telephony providers.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">📈</div>
+                    <h4 style="margin: 1rem 0 0.5rem; color: var(--primary);">Unlimited Scalability</h4>
+                    <p>Easily scale from 250 to 500+ SIMs as your business grows. Infrastructure grows with you.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔗</div>
+                    <h4 style="margin: 1rem 0 0.5rem; color: var(--primary);">Seamless CRM Integration</h4>
+                    <p>One-click calling, automatic logging, and complete conversation history in your CRM.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">📞</div>
+                    <h4 style="margin: 1rem 0 0.5rem; color: var(--primary);">High-Volume Capacity</h4>
+                    <p>Handle thousands of daily calls with professional quality and zero bottlenecks.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎙️</div>
+                    <h4 style="margin: 1rem 0 0.5rem; color: var(--primary);">Complete Call Recording</h4>
+                    <p>Every call automatically recorded for quality assurance, training, and compliance.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">💬</div>
+                    <h4 style="margin: 1rem 0 0.5rem; color: var(--primary);">Unified Communication</h4>
+                    <p>Calls and WhatsApp messages in one platform. Complete communication history per customer.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">📊</div>
+                    <h4 style="margin: 1rem 0 0.5rem; color: var(--primary);">Advanced Analytics</h4>
+                    <p>Deep insights into call patterns, agent performance, and customer engagement metrics.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🛡️</div>
+                    <h4 style="margin: 1rem 0 0.5rem; color: var(--primary);">Maximum Uptime</h4>
+                    <p>Dual ISP redundancy and optional HA setup ensure your business never stops.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔐</div>
+                    <h4 style="margin: 1rem 0 0.5rem; color: var(--primary);">Data Privacy</h4>
+                    <p>All customer data and recordings remain on your premises. Complete privacy control.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <h4 style="margin: 1rem 0 0.5rem; color: var(--primary);">Intelligent Automation</h4>
+                    <p>Smart SIM rotation, automatic call distribution, and self-healing systems.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h4 style="margin: 1rem 0 0.5rem; color: var(--primary);">Competitive Advantage</h4>
+                    <p>Professional telephony infrastructure that matches enterprise-level real estate firms.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technology Stack -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">13</div>
+                <h2>Technology Stack & Components</h2>
+            </div>
+
+            <h3>Core Technologies</h3>
+            <div style="margin: 2rem 0;">
+                <span class="tech-badge">Asterisk PBX</span>
+                <span class="tech-badge">FreePBX</span>
+                <span class="tech-badge">Linux Ubuntu Server</span>
+                <span class="tech-badge">MySQL Database</span>
+                <span class="tech-badge">SIP Protocol</span>
+                <span class="tech-badge">GSM Gateways</span>
+                <span class="tech-badge">WhatsApp Business API</span>
+                <span class="tech-badge">REST APIs</span>
+                <span class="tech-badge">WebRTC</span>
+                <span class="tech-badge">RAID Storage</span>
+            </div>
+
+            <h3>Integration Capabilities</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">🔌 CRM API Integration</div>
+                    <p>RESTful API for seamless CRM communication and data exchange</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📱 Mobile App Support</div>
+                    <p>WebRTC support for softphone applications on mobile devices</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📧 Email Notifications</div>
+                    <p>Automated email alerts for missed calls, voicemails, and system events</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📈 Third-party Analytics</div>
+                    <p>Export data to business intelligence and analytics platforms</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Summary -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">14</div>
+                <h2>Solution Summary</h2>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="color: white; margin-top: 0;">Complete Telephony Transformation for Delta Yards</h3>
+                <p style="color: white; font-size: 1.1rem;">This comprehensive GSM infrastructure solution will revolutionize your real estate communication operations, providing enterprise-grade capabilities with complete ownership and control.</p>
+            </div>
+
+            <h3>What You Get</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">✅ Complete Infrastructure Ownership</div>
+                    <p>No dependency on third-party telephony vendors</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">✅ 250-300 SIM Capacity</div>
+                    <p>Ready for high-volume real estate operations</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">✅ Seamless CRM Integration</div>
+                    <p>One-click calling with automatic logging</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">✅ WhatsApp Business API</div>
+                    <p>Unified communication platform</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">✅ Complete Call Recording</div>
+                    <p>Every conversation captured and stored</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">✅ Advanced Analytics</div>
+                    <p>Data-driven insights for better decisions</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">✅ Maximum Uptime</div>
+                    <p>Dual ISP redundancy for reliability</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">✅ Scalability</div>
+                    <p>Easily expandable as you grow</p>
+                </div>
+            </div>
+
+            <div class="note-box">
+                <strong>Perfect for Real Estate Operations:</strong>
+                <p style="margin-top: 0.5rem;">This solution is specifically designed for real estate businesses like Delta Yards, where high-volume calling, systematic follow-ups, and professional communication are critical to success. You'll have the same telephony infrastructure as major enterprise real estate firms, but with complete ownership and control.</p>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="cta-section">
+            <div class="cta-content">
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1rem;">Ready to Transform Your Communication?</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.95;">Let's discuss how this GSM infrastructure can elevate Delta Yards' operations to the next level.</p>
+                <a href="mailto:info@deltayards.com" class="cta-button">Schedule a Consultation</a>
+                <p style="margin-top: 2rem; opacity: 0.8;">Contact us for detailed quotations, customization options, and implementation timeline.</p>
+            </div>
+        </div>
+
+        <!-- Company Info -->
+        <div class="section" style="text-align: center;">
+            <div class="logo-section" style="justify-content: center; margin-bottom: 1.5rem;">
+                <div class="logo">DY</div>
+                <div>
+                    <div class="company-name" style="color: var(--dark);">Delta Yards</div>
+                    <div class="tagline" style="color: var(--text-light);">Realty Private Limited</div>
+                </div>
+            </div>
+            <p style="color: var(--text-light); margin: 0.5rem 0;">Office No 8, 2nd Floor, Salasar Commercial Center</p>
+            <p style="color: var(--text-light); margin: 0.5rem 0;">Near Reliance Energy, Phatak Road</p>
+            <p style="color: var(--text-light); margin: 0.5rem 0;">Bhayandar East, Thane - 401105</p>
+            <p style="color: var(--text-light); margin: 1rem 0;">📞 +91 7977037145 | 📧 info@deltayards.com</p>
+            <p style="color: var(--text-light); margin: 0.5rem 0;">🌐 www.deltayards.com</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2026 Delta Yards Realty Private Limited. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">GSM Infrastructure Technical Proposal</p>
+    </div>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section, .card, .benefit-card').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            el.style.animationDelay = `${index * 0.05}s`;
+            observer.observe(el);
+        });
+
+        // Add hover sound effect simulation for cards
+        document.querySelectorAll('.card, .benefit-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            });
+        });
+
+        // Parallax effect for stat boxes
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const statBoxes = document.querySelectorAll('.stat-box');
+            statBoxes.forEach((box, index) => {
+                const speed = 0.1 + (index * 0.05);
+                box.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Add ripple effect to CTA button
+        const ctaButton = document.querySelector('.cta-button');
+        if (ctaButton) {
+            ctaButton.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255,255,255,0.5)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s ease-out';
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        }
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
