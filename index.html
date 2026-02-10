@@ -2022,10 +2022,256 @@
             </div>
         </div>
 
-        <!-- Key Benefits -->
+        <!-- Infrastructure Investment -->
         <div class="section">
             <div class="section-header">
                 <div class="section-number">12</div>
+                <h2>Infrastructure Investment Breakdown</h2>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="color: white; margin-top: 0;">Total Investment Overview</h3>
+                <p style="color: white; font-size: 1.1rem;">Complete on-premise GSM telephony infrastructure with 250-300 SIM capacity, providing enterprise-grade capabilities with full ownership and control.</p>
+            </div>
+
+            <!-- Cost Breakdown Visualization -->
+            <svg class="diagram-image" viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="costGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#1a4d2e;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#4f8a6d;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="costGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#d4af37;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#c19b2d;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+
+                <!-- Title -->
+                <text x="450" y="35" text-anchor="middle" fill="#1a4d2e" font-size="24" font-weight="bold">Investment Components</text>
+
+                <!-- GSM Gateways -->
+                <g transform="translate(50, 70)">
+                    <rect x="0" y="0" width="350" height="80" rx="10" fill="url(#costGrad1)"/>
+                    <text x="20" y="30" fill="white" font-size="16" font-weight="bold">📡 GSM Gateways (8 Units)</text>
+                    <text x="20" y="52" fill="white" font-size="13">32-Port Gateways × 8</text>
+                    <text x="20" y="70" fill="white" font-size="12" opacity="0.9">256 Total SIM Capacity</text>
+                    <text x="330" y="45" text-anchor="end" fill="white" font-size="20" font-weight="bold">₹8-12L</text>
+                </g>
+
+                <!-- PBX Server -->
+                <g transform="translate(450, 70)">
+                    <rect x="0" y="0" width="400" height="80" rx="10" fill="url(#costGrad1)"/>
+                    <text x="20" y="30" fill="white" font-size="16" font-weight="bold">🖥️ Primary PBX Server</text>
+                    <text x="20" y="52" fill="white" font-size="13">16-Core CPU, 32GB RAM, NVMe SSD</text>
+                    <text x="20" y="70" fill="white" font-size="12" opacity="0.9">High-Performance Configuration</text>
+                    <text x="380" y="45" text-anchor="end" fill="white" font-size="20" font-weight="bold">₹2-3L</text>
+                </g>
+
+                <!-- HA Server -->
+                <g transform="translate(50, 170)">
+                    <rect x="0" y="0" width="350" height="80" rx="10" fill="url(#costGrad1)" opacity="0.85"/>
+                    <text x="20" y="30" fill="white" font-size="16" font-weight="bold">🔄 HA Backup Server (Optional)</text>
+                    <text x="20" y="52" fill="white" font-size="13">High Availability Configuration</text>
+                    <text x="20" y="70" fill="white" font-size="12" opacity="0.9">Recommended for 99.9% Uptime</text>
+                    <text x="330" y="45" text-anchor="end" fill="white" font-size="20" font-weight="bold">₹2-3L</text>
+                </g>
+
+                <!-- NAS Storage -->
+                <g transform="translate(450, 170)">
+                    <rect x="0" y="0" width="400" height="80" rx="10" fill="url(#costGrad1)" opacity="0.85"/>
+                    <text x="20" y="30" fill="white" font-size="16" font-weight="bold">💾 NAS Storage System</text>
+                    <text x="20" y="52" fill="white" font-size="13">5-10TB RAID Configuration</text>
+                    <text x="20" y="70" fill="white" font-size="12" opacity="0.9">Call Recording & Backup Storage</text>
+                    <text x="380" y="45" text-anchor="end" fill="white" font-size="20" font-weight="bold">₹1.5-2.5L</text>
+                </g>
+
+                <!-- Networking Equipment -->
+                <g transform="translate(50, 270)">
+                    <rect x="0" y="0" width="350" height="80" rx="10" fill="url(#costGrad2)"/>
+                    <text x="20" y="30" fill="white" font-size="16" font-weight="bold">🌐 Networking & Security</text>
+                    <text x="20" y="52" fill="white" font-size="13">Load Balancer, Firewall, Switches</text>
+                    <text x="20" y="70" fill="white" font-size="12" opacity="0.9">Dual ISP Configuration</text>
+                    <text x="330" y="45" text-anchor="end" fill="white" font-size="20" font-weight="bold">₹1-1.5L</text>
+                </g>
+
+                <!-- Infrastructure -->
+                <g transform="translate(450, 270)">
+                    <rect x="0" y="0" width="400" height="80" rx="10" fill="url(#costGrad2)"/>
+                    <text x="20" y="30" fill="white" font-size="16" font-weight="bold">🏗️ Rack & Infrastructure</text>
+                    <text x="20" y="52" fill="white" font-size="13">Server Rack, Cooling, Cabling, UPS</text>
+                    <text x="20" y="70" fill="white" font-size="12" opacity="0.9">Professional Setup</text>
+                    <text x="380" y="45" text-anchor="end" fill="white" font-size="20" font-weight="bold">₹80K-1.2L</text>
+                </g>
+
+                <!-- Implementation -->
+                <g transform="translate(50, 370)">
+                    <rect x="0" y="0" width="800" height="80" rx="10" fill="#4f8a6d"/>
+                    <text x="20" y="30" fill="white" font-size="16" font-weight="bold">⚙️ Implementation & Integration</text>
+                    <text x="20" y="52" fill="white" font-size="13">Installation, Configuration, CRM Integration, Testing, Training</text>
+                    <text x="20" y="70" fill="white" font-size="12" opacity="0.9">Complete Turnkey Solution with 3 Months Support</text>
+                    <text x="780" y="45" text-anchor="end" fill="white" font-size="20" font-weight="bold">₹3-4L</text>
+                </g>
+            </svg>
+            <p class="image-caption">Complete Infrastructure Cost Breakdown</p>
+
+            <h3>Detailed Cost Table</h3>
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Specification</th>
+                        <th>Quantity</th>
+                        <th>Estimated Cost (INR)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>GSM Gateways</strong></td>
+                        <td>32-Port (Dinstar/OpenVox/Synway)</td>
+                        <td>8 Units</td>
+                        <td><strong>₹8,00,000 - ₹12,00,000</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Primary PBX Server</strong></td>
+                        <td>16-Core, 32GB RAM, 500GB NVMe</td>
+                        <td>1 Unit</td>
+                        <td><strong>₹2,00,000 - ₹3,00,000</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>HA Backup Server</strong></td>
+                        <td>Similar specs (Optional but Recommended)</td>
+                        <td>1 Unit</td>
+                        <td><strong>₹2,00,000 - ₹3,00,000</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>NAS Storage</strong></td>
+                        <td>5-10TB RAID Configuration</td>
+                        <td>1 System</td>
+                        <td><strong>₹1,50,000 - ₹2,50,000</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Network Equipment</strong></td>
+                        <td>Load Balancer, Firewall, Switches</td>
+                        <td>1 Set</td>
+                        <td><strong>₹1,00,000 - ₹1,50,000</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Server Rack & Infrastructure</strong></td>
+                        <td>42U Rack, Cooling, UPS, Cabling</td>
+                        <td>1 Set</td>
+                        <td><strong>₹80,000 - ₹1,20,000</strong></td>
+                    </tr>
+                    <tr style="background: #f5f7f6; font-weight: bold;">
+                        <td colspan="3" style="text-align: right; color: var(--primary); font-size: 1.1rem;">Hardware Subtotal:</td>
+                        <td style="color: var(--primary); font-size: 1.1rem;"><strong>₹15,30,000 - ₹23,20,000</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Implementation & Integration</strong></td>
+                        <td>Installation, Config, CRM Integration, Testing</td>
+                        <td>-</td>
+                        <td><strong>₹3,00,000 - ₹4,00,000</strong></td>
+                    </tr>
+                    <tr style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white;">
+                        <td colspan="3" style="text-align: right; font-size: 1.3rem; padding: 1.2rem;"><strong>TOTAL INVESTMENT:</strong></td>
+                        <td style="font-size: 1.3rem; padding: 1.2rem;"><strong>₹18,30,000 - ₹27,20,000</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="grid-2" style="margin-top: 2rem;">
+                <div class="note-box">
+                    <strong>💰 Cost Range Explanation:</strong>
+                    <ul style="margin: 0.5rem 0 0 1.5rem;">
+                        <li><strong>Lower range (₹18.3L):</strong> Budget-friendly options with Synway gateways, without HA server</li>
+                        <li><strong>Higher range (₹27.2L):</strong> Premium OpenVox gateways with complete HA setup</li>
+                        <li><strong>Recommended:</strong> Mid-range configuration at approximately ₹22-23 lakhs</li>
+                    </ul>
+                </div>
+
+                <div class="note-box" style="background: #e8f5e9; border-left-color: #4f8a6d;">
+                    <strong>📊 ROI Considerations:</strong>
+                    <ul style="margin: 0.5rem 0 0 1.5rem;">
+                        <li>One-time investment vs. recurring cloud telephony costs</li>
+                        <li>No per-minute charges for high-volume calling</li>
+                        <li>Complete data ownership and privacy</li>
+                        <li>Scalable to 500+ SIMs without major reinvestment</li>
+                        <li>Typical ROI achieved within 12-18 months</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Ongoing Operational Costs (Monthly)</h3>
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th>Expense Category</th>
+                        <th>Description</th>
+                        <th>Estimated Cost (INR/Month)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>SIM Cards & Recharge</strong></td>
+                        <td>250-300 SIMs with calling plans</td>
+                        <td><strong>₹75,000 - ₹1,50,000</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Internet Connectivity</strong></td>
+                        <td>Dual ISP (Fiber + Backup)</td>
+                        <td><strong>₹10,000 - ₹15,000</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>WhatsApp Business API</strong></td>
+                        <td>Conversation-based pricing</td>
+                        <td><strong>₹20,000 - ₹40,000</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Electricity & Cooling</strong></td>
+                        <td>Server room power consumption</td>
+                        <td><strong>₹8,000 - ₹12,000</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Maintenance & Support</strong></td>
+                        <td>Optional AMC (5-8% of hardware cost annually)</td>
+                        <td><strong>₹15,000 - ₹25,000</strong></td>
+                    </tr>
+                    <tr style="background: #fff8e1;">
+                        <td colspan="2" style="text-align: right; font-weight: bold; color: var(--primary);">Estimated Monthly Operating Cost:</td>
+                        <td style="font-weight: bold; color: var(--primary);"><strong>₹1,28,000 - ₹2,42,000</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box" style="margin-top: 2rem;">
+                <h3 style="color: white; margin-top: 0;">💡 Investment Advantages</h3>
+                <div class="grid-2">
+                    <div>
+                        <h4 style="color: white; margin-bottom: 0.5rem;">One-Time Capex Model</h4>
+                        <ul class="feature-list" style="color: white;">
+                            <li style="border-bottom-color: rgba(255,255,255,0.2);">No per-minute billing charges</li>
+                            <li style="border-bottom-color: rgba(255,255,255,0.2);">Predictable operational costs</li>
+                            <li style="border-bottom-color: rgba(255,255,255,0.2);">3-5 year asset depreciation</li>
+                            <li style="border-bottom-color: rgba(255,255,255,0.2);">Full ownership & control</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: white; margin-bottom: 0.5rem;">vs. Cloud Telephony</h4>
+                        <ul class="feature-list" style="color: white;">
+                            <li style="border-bottom-color: rgba(255,255,255,0.2);">Avoid ₹1-2L+ monthly bills</li>
+                            <li style="border-bottom-color: rgba(255,255,255,0.2);">No vendor lock-in</li>
+                            <li style="border-bottom-color: rgba(255,255,255,0.2);">Better for high-volume usage</li>
+                            <li style="border-bottom-color: rgba(255,255,255,0.2);">ROI in 12-18 months</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Benefits -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">13</div>
                 <h2>Key Business Benefits</h2>
             </div>
 
@@ -2107,7 +2353,7 @@
         <!-- Technology Stack -->
         <div class="section">
             <div class="section-header">
-                <div class="section-number">13</div>
+                <div class="section-number">14</div>
                 <h2>Technology Stack & Components</h2>
             </div>
 
@@ -2149,7 +2395,7 @@
         <!-- Final Summary -->
         <div class="section">
             <div class="section-header">
-                <div class="section-number">14</div>
+                <div class="section-number">15</div>
                 <h2>Solution Summary</h2>
             </div>
 
